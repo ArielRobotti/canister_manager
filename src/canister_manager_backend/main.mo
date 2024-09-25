@@ -15,17 +15,11 @@ shared ({ caller = DEPLOYER }) actor class this() = {
         (await manager.create_canister({ settings = ?settings})).canister_id;
     };
 
-    public func installWasm(canister : Principal, wasm : [Nat8]) : () {
-
-        // install_code : shared {
-        //     arg : [Nat8];
-        //     wasm_module : wasm_module;
-        //     mode : { #reinstall; #upgrade; #install };
-        //     canister_id : canister_id;
-        // } -> async ();
-
+    public func installWasm(canister : Principal, wasm : [Nat8], fee: Nat) : () {
+        
+        ExperimentalCycles.add<system>(fee);
         await manager.install_code({
-            arg = []; //
+            arg = []; 
             wasm_module = wasm;
             mode = #install;
             canister_id = canister;
