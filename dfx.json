@@ -1,6 +1,6 @@
 {
   "canisters": {
-    "canister_manager_backend": {
+    "backend": {
       "main": "src/canister_manager_backend/main.mo",
       "type": "motoko"
     }
